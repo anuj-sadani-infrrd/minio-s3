@@ -1,7 +1,3 @@
-Here’s the updated `README.md` with Step 2 for creating access and secret keys using MinIO's UI and Step 3 for creating buckets via the UI.
-
----
-
 # MinIO S3 Operations with Docker and Boto3
 
 This repository contains instructions and a Python script (`minio_util.py`) to perform basic S3 operations using MinIO, Docker, and `boto3`. You will be able to set up MinIO locally, create access keys, manage buckets, and upload/download objects using `boto3`.
