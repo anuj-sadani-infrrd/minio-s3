@@ -8,7 +8,8 @@ This repository contains instructions and a Python script (`minio_util.py`) to p
 - Python 3.x installed (need version 3.7+).
 - `boto3` installed. You can install it using:
   ```bash
-  pip install boto3
+  pip install boto3 
+  pip install python-dotenv
   ```
 
 ## Step 1: Running MinIO in Docker
@@ -54,8 +55,17 @@ To interact with MinIO using `boto3`, you need an access key and secret key. Her
    - **Important**: Copy the **secret key** immediately, as it will only be shown once.
 
    You can now use these keys in your Python script (`minio_util.py`) for connecting to MinIO.
+4. Create a `,env` file to store the values, which will be used by the python script
 
-## Step 3: Creating Buckets Using MinIO UI
+   ```
+   AWS_ENDPOINT_URL=http://127.0.0.1:9000
+   AWS_DEFAULT_REGION=us-west-2
+   AWS_ACCESS_KEY_ID=your-access-key-id
+   AWS_SECRET_ACCESS_KEY=your-secret-access-key
+
+   ```
+
+## Step 3: Creating Buckets Using MinIO UI (Optional)
 
 Once you've set up MinIO and created your keys, follow these steps to create a bucket:
 

@@ -1,3 +1,4 @@
+from dotenv import load_dotenv
 import time
 from urllib.parse import urljoin
 import sys
@@ -6,22 +7,15 @@ from botocore.exceptions import ClientError
 import os
 import logging
 
+# Load environment variables from .env file
+load_dotenv()
+
 logger = logging.getLogger(__name__)
 
 
 class MinIOClient:
-    def __init__(self, endpoint_url, access_key, secret_key, use_ssl=True):
-        self.endpoint_url = endpoint_url
-        self.access_key = access_key
-        self.secret_key = secret_key
-        self.use_ssl = use_ssl
-        self.client = boto3.client(
-            "s3",
-            endpoint_url=self.endpoint_url,
-            aws_access_key_id=self.access_key,
-            aws_secret_access_key=self.secret_key,
-            use_ssl=self.use_ssl,
-        )
+    def __init__(self, region_name):
+        self.client = boto3.client("s3", region_name=region_name)
 
     def create_bucket(self, bucket_name):
         try:
@@ -124,12 +118,8 @@ class MinIOClient:
 
 if __name__ == "__main__":
     logging.basicConfig(stream=sys.stdout, level=logging.INFO)
-
-    MINIO_ENDPOINT = "http://127.0.0.1:9000"
-    ACCESS_KEY = "aUzRS6MbEKshAZP0pT71"
-    SECRET_KEY = "ewJniPyfTDlYmyhVvOfDPIlvZTKizTVdV6E5Ihjp"
-
-    minio_client = MinIOClient(MINIO_ENDPOINT, ACCESS_KEY, SECRET_KEY)
+    
+    minio_client = MinIOClient(region_name="us-west-2")
 
     # Create 3 buckets
     bucket_names = [f"my-bucket-{i}" for i in range(1, 4)]
